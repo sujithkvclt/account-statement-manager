@@ -34,9 +34,7 @@ Ensure that you are in the project root directory.
 * Build application by skipping the unit tests.
 
   `mvn clean install -DskipTests`
-* Build application as a single assembled jar.
 
-  `mvn clean compile assembly:single`
 * Prepare Jacoco reports & add to sonar
 
   `mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install`
@@ -44,22 +42,14 @@ Ensure that you are in the project root directory.
   `mvn sonar:sonar -Dsonar.login={sonarqube-token}`
 
 #### Start the application using any of the below command.
-* Start using maven command.
-
-  `mvn spring-boot:run`
-
-* The default port for the application is configured as `8080`. It can be overridden using below command.
-
-  `mvn spring-boot:run -Dspring-boot.run.arguments=--port=8085`
-
-* The MS Access database path can be provided as command line variable using below command. 
-However, I have added the accountdb.accdb in the application class path as a default database for the easiness of testing.
+* Start using maven command,  the database path should be provided in the run command as a run argument as below.
 
   `mvn spring-boot:run -Dspring-boot.run.arguments=--database.path=path/to/accountsdb.accdb`
 
-* Start using java command. For this, the application should be build as a single assembled jar 
+* The default port for the application is configured as `8080`. It can be overridden using below command.
 
-  `java -jar path/to/jarfile.jar`
+  `mvn spring-boot:run -Dspring-boot.run.arguments="--database.path=path/to/accountsdb.accdb --port=8085"`
+
 
 ### Users and Roles
 Only two users are available for the application
