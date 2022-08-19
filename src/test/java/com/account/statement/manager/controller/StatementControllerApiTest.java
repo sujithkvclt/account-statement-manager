@@ -1,13 +1,21 @@
 package com.account.statement.manager.controller;
 
+import com.account.statement.manager.entity.Account;
+import com.account.statement.manager.repository.AccountRepository;
+import com.account.statement.manager.repository.StatementRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
+import java.util.Optional;
+
+import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -19,6 +27,12 @@ class StatementControllerApiTest {
     @Autowired
     MockMvc mockMvc;
 
+    @MockBean
+    AccountRepository accountRepository;
+
+    @MockBean
+    StatementRepository statementRepository;
+
     @Test
     @DisplayName("Authorization failure Test")
     void authorizationFailureTest() throws Exception {
@@ -29,6 +43,8 @@ class StatementControllerApiTest {
     @Test
     @DisplayName("ADMIN authorization success Test")
     void adminAuthorizationSuccessTest() throws Exception {
+        when(accountRepository.getAccountByAccountId(1L)).thenReturn(Optional.of(new Account(1L, "savings", "1987657")));
+        when(statementRepository.getStatementsByAccountId(1L)).thenReturn(new ArrayList<>());
         mockMvc.perform(get("/statements/1").contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
                         .with(user("test").password("test").roles("ADMIN")).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -45,6 +61,8 @@ class StatementControllerApiTest {
     @Test
     @DisplayName("USER authorization success Test")
     void userAuthorizationSuccessTest() throws Exception {
+        when(accountRepository.getAccountByAccountId(1L)).thenReturn(Optional.of(new Account(1L, "savings", "1987657")));
+        when(statementRepository.getStatementsByAccountId(1L)).thenReturn(new ArrayList<>());
         mockMvc.perform(get("/statements/user/1").contentType(MediaType.APPLICATION_JSON).characterEncoding("utf-8")
                         .with(user("test").password("test").roles("USER")).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
