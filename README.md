@@ -45,6 +45,8 @@ Ensure that you are in the project root directory.
 * Start using maven command,  the database path should be provided in the run command as a run argument as below.
 
   `mvn spring-boot:run -Dspring-boot.run.arguments=--database.path=path/to/accountsdb.accdb`
+  
+  eg: `mvn spring-boot:run -Dspring-boot.run.arguments=--database.path=C://Users/91755/Documents/Sujith/accountsdb.accdb`
 
 * The default port for the application is configured as `8080`. It can be overridden using below command.
 
