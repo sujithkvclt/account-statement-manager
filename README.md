@@ -1,15 +1,13 @@
 # Account Statement Manager
 
 The application can be used to view account statements of different users from the MS Access database. The Rest API 
-based application is developed using Java 17 and Spring framework. 
+based application is developed using Spring Framework with Java 17. 
 
-### Implemented Features
-* Implemented role based authorization using spring security.
-* The user cannot log in twice. User should log out before login from another browser.
-* The session timeout is configured as 5 minutes.
-* Implemented application logging using Spring Aspect and Slf4J.
-* Implemented error handling using ControllerAdvice.
-* For user's with USER role, API always return statements for last three months.
+### Features
+* Role based authorization using Spring Security.
+* Session Management.
+* Application Logging using Spring Aspect and Slf4J.
+* Exception handling using ControllerAdvice.
 
 ### Java Libraries 
 * Spring Boot 2.7.2
@@ -24,11 +22,11 @@ based application is developed using Java 17 and Spring framework.
 * Jacoco
 * SonarQube
 
-### Instructions to build and start the application.
-Ensure that you are in the project root directory.
 #### Build the application using any of the below maven command.
 
-* Build application and run unit test.
+Ensure that you are in the project root directory.
+
+* Build application and run unit test cases.
 
   `mvn clean install`
 * Build application by skipping the unit tests.
@@ -54,12 +52,12 @@ Ensure that you are in the project root directory.
 
 
 ### Users and Roles
-Only two users are available for the application
 
 | Username | Password | Role  |
 |----------|----------|-------|
 | user     | user     | USER  |
 | admin    | admin    | ADMIN |
+
 ### Application Rest APIs
 #### http://localhost:8080/statements/{accountId}?fromDate={fromDate}&toDate={toDate}&fromAmount={fromAmount}&toAmount={toAmount}
 * Access to this API is restricted to `ADMIN` users only.
