@@ -16,10 +16,10 @@ based application is developed using Spring Framework with Java 17.
 * Maven
 * Junit 5
 * Mockito
-* Slf4j
+* SLF4J
 * Lombok
 * Swagger
-* Jacoco
+* JaCoCo
 * SonarQube
 
 #### Build the application using any of the below maven command.
@@ -66,6 +66,6 @@ Ensure that you are in the project root directory.
 * `fromAmount` and `toAmount` are optional request parameters. The value should be in number format. eg: `10`,`180.24`
 
 #### http://localhost:8080/statements/user/{accountId}
-* This API can be accessed by users with `ADMIN` role or `USER` role.
+* This API can be accessed by any of the user.
 * `accountId` is a required parameter and added as a path parameter. The value should be a number. eg:`1`,`4`
 
