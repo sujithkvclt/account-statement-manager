@@ -10,9 +10,10 @@ import lombok.Getter;
  */
 @Getter
 public enum ErrorEnum {
-    APP200001("200-001", ErrorMessages.STATEMENTS_NOT_FOUND),
+
     APP400001("400-001", ErrorMessages.BAD_REQUEST),
     APP404001("404-001", ErrorMessages.ACCOUNT_NOT_FOUND),
+    APP404002("404-002", ErrorMessages.STATEMENTS_NOT_FOUND),
     APP500001("500-001", ErrorMessages.INTERNAL_SERVER_ERROR);
 
     private final String code;

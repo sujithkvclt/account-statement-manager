@@ -45,6 +45,10 @@ public class StatementServiceImpl implements StatementService {
                     .filter(statement -> statement.getAmount() > request.getFromAmount())
                     .filter(statement -> statement.getAmount() < request.getToAmount()).toList();
 
+            if(filteredStatements.isEmpty()){
+                throw new ResourceNotFoundException(new ApiError(ErrorEnum.APP404002));
+            }
+
             response = AccountStatementResponse.builder().accountId(account.get().getId())
                     .accountNumber(DigestUtils.sha256Hex(account.get().getAccountNumber()))
                     .statements(StatementMapper.map(filteredStatements)).build();
